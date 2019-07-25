@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_POSTS, DELETE_POST, CREATE_POST, GET_POST, POST_LOADING } from "./types";
+import { GET_POSTS, DELETE_POST, CREATE_POST, GET_POST, POST_LOADING, EDIT_POST } from "./types";
 import Swal from 'sweetalert2';
 
 // URL de la api que se va a consumir
@@ -55,7 +55,7 @@ export const eliminarPost = id => dispatch => {
     })
 }
 
-export const crearPost = (post, history) => dispatch => {
+export const crearPost = (post, id) => dispatch => {
     axios.post(url, { post })
         .then(res => {
             if (res.status === 201) {
@@ -73,7 +73,6 @@ export const crearPost = (post, history) => dispatch => {
                     type: CREATE_POST,
                     payload: nuevoPost
                 })
-                // history.push('/')
             }
         })
 }
@@ -89,29 +88,25 @@ export const obtenerPost = id => dispatch => {
     })
 }
 
-export const editarPost = postActualizado => dispatch => {
-    const {id} = postActualizado;
+export const editarPost = (postActualizado, id) => dispatch => {
 
     axios.put(`${url}/${id}`, {postActualizado})
         .then(res => {
             if(res.status === 200) {
-                Swal(
-                    'Post Actualizado',
-                    'El post se ha actualizado',
+                Swal.fire(
+                    'Post Creado!',
+                    'El post ha creado. Para visualizarlo ve a Redux DevTools',
                     'success'
                 )
-
-                let postId = res.data.id;
-
-                const posts = [...this.state.posts];
-
-                const postEditar = posts.findIndex(post => postId === post.id);
-
-                posts[postEditar] = postActualizado;
                 
-                this.setState({
-                    posts
+                let postId = { id: res.data.id};
+                const nuevoPost = Object.assign({}, res.data.postActualizado, postId);
+                console.log(nuevoPost)
+                dispatch({
+                    type: EDIT_POST,
+                    payload: nuevoPost
                 })
+
             }
         })
 }

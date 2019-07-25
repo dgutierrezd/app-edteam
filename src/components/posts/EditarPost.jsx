@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import Formulario from '../Utils/Formulario';
 
 // Importar los posts desde el state de Redux
@@ -21,12 +22,19 @@ const EditarPost = props => {
         formulario = null;
     }   else {
         formulario = (
-            <Formulario titulo={post.title} texto={post.body} post={post} metodo={props.editarPost} mensaje='editado' accion="Editar" />
+            <Formulario id={post.id} titulo={post.title} texto={post.body} post={post} metodo={props.editarPost} mensaje='editado' accion="Editar" />
         )
     }
 
     return (
         <div>
+            <div className="row">
+                <div className="col-md-6">
+                    <Link to ='/' className="btn btn-secondary my-3 ml-3 float-left">
+                        Volver a los Posts
+                    </Link>
+                </div>
+            </div>
             {formulario}
         </div>
     );

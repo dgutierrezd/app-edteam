@@ -7,7 +7,7 @@ import {crearPost} from '../../actions/postsActions';
 const CrearPost = props => {
     return (
         <div>
-            <Formulario titulo="" texto="" metodo={props.crearPost} mensaje='creado' accion='Crear' />
+            <Formulario id='' titulo="" texto="" metodo={props.crearPost} mensaje='creado' accion='Crear' />
         </div>
     );
 };

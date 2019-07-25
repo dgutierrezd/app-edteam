@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 const Formulario = props => {
 
@@ -15,7 +14,7 @@ const Formulario = props => {
             texto
         }
 
-        props.metodo(post, props.history)
+        props.metodo(post, props.id)
     }
 
     return (

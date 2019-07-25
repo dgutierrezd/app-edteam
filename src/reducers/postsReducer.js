@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
             };
         case GET_POSTS:
             return {
-                ...state,
+                // ...state,
                 posts: action.payload,
                 loading: false
             }
@@ -33,6 +33,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 posts: [...state.posts, action.payload]
+            }
+        case EDIT_POST:
+            return {
+                ...state,
+                posts: state.posts.map(post => post.id === action.payload.id ? (post = action.payload): post)
             }
 
         default:
