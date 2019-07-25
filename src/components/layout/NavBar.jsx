@@ -11,9 +11,11 @@ const NavBar = () => {
 
             <div className="collapse navbar-collapse" id="navbarColor02">
                 <ul className="navbar-nav mr-auto">
+                    {/* Ruta para ir a conocer los posts */}
                     <li className="nav-item">
                         <Link className="nav-link" to='/'>Posts</Link>
                     </li>
+                    {/* Ruta para crear un nuevo post */}
                     <li className="nav-item">
                         <Link className="nav-link" to='/new-post'>Nuevo Post</Link>
                     </li>

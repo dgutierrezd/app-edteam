@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Redux
 import store from './store';
 import {Provider} from 'react-redux';
+
+// Componentes
 import NavBar from './components/layout/NavBar';
 import Posts from './components/posts/Posts';
 import CrearPost from './components/posts/CrearPost';

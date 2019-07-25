@@ -30,8 +30,10 @@ export const eliminarPost = id => dispatch => {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.value) {
+            // Al aceptar el modal, se hace el consumo con un delete a la api
             axios.delete(`${url}/${id}`)
                 .then(res => {
+                    // Se verifica que el post se elimino, conociendo su estado
                     if (res.status === 200) {
                         dispatch({
                             type: DELETE_POST,
@@ -55,15 +57,20 @@ export const eliminarPost = id => dispatch => {
     })
 }
 
+// Se crea un post, donde el resultado se puede ver en el DevTools de Redux
 export const crearPost = (post, id) => dispatch => {
+    // Se hace el llamado para crear el post con post
     axios.post(url, { post })
         .then(res => {
+            // Se verifica que el post se creo, conociendo su estado
             if (res.status === 201) {
                 Swal.fire(
                     'Post Creado!',
                     'El post ha creado. Para visualizarlo ve a Redux DevTools',
                     'success'
                 )
+
+                // Se almacenan los datos del post en un mismo objeto
                 let postId = {
                     id: res.data.id
                 }
@@ -77,6 +84,7 @@ export const crearPost = (post, id) => dispatch => {
         })
 }
 
+// Obtener de la api, un post en especifico
 export const obtenerPost = id => dispatch => {
     dispatch(setPostLoading())
     axios.get(`${url}/${id}`)
@@ -88,10 +96,12 @@ export const obtenerPost = id => dispatch => {
     })
 }
 
+// Editar un post en especifico
 export const editarPost = (postActualizado, id) => dispatch => {
 
     axios.put(`${url}/${id}`, {postActualizado})
         .then(res => {
+            // Se verifica que el post se edito, conociendo su estado
             if(res.status === 200) {
                 Swal.fire(
                     'Post Creado!',
@@ -99,9 +109,11 @@ export const editarPost = (postActualizado, id) => dispatch => {
                     'success'
                 )
                 
+                // Se almacenan los datos del post en un mismo objeto
                 let postId = { id: res.data.id};
                 const nuevoPost = Object.assign({}, res.data.postActualizado, postId);
                 console.log(nuevoPost)
+
                 dispatch({
                     type: EDIT_POST,
                     payload: nuevoPost

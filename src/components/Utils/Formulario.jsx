@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 
 const Formulario = props => {
 
+    // Se almacena el titulo y el texto del post en su respectivo state para poder usarlos en el form
     const [titulo, guardarTitulo] = useState(props.titulo);
     const [texto, guardarTexto] = useState(props.texto);
 

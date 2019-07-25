@@ -9,6 +9,8 @@ import {editarPost, obtenerPost} from '../../actions/postsActions';
 
 const EditarPost = props => {
 
+    // Se usa useEffect como componentDidMount y se conoce el id que esta en la ruta
+    // Y se conoce el post.
     useEffect(() => {
         const {postId} = props.match.params;
         props.obtenerPost(postId);
@@ -17,11 +19,13 @@ const EditarPost = props => {
 
     const {post, loading} = props;
 
+    // Se verifica si en el momento hay un post, y en el momento que lo haya se llama el formulario para editarlo.
     let formulario;
     if(post === undefined || loading) {
         formulario = null;
     }   else {
         formulario = (
+            // Se llama el formulario y se le envian los props necesarios 
             <Formulario id={post.id} titulo={post.title} texto={post.body} post={post} metodo={props.editarPost} mensaje='editado' accion="Editar" />
         )
     }
