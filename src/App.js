@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// Redux
+import store from './store';
+import {Provider} from 'react-redux';
+import NavBar from './components/layout/NavBar';
+import Posts from './components/posts/Posts';
+import CrearPost from './components/posts/CrearPost';
+import EditarPost from './components/posts/EditarPost';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Posts} />
+          <Route exact path="/new-post" component={CrearPost} />
+          <Route exact path="/editar/:postId" component={EditarPost}/>          
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
+
+
 
 export default App;
